@@ -8,8 +8,7 @@
 # This script works with scopes configured for failover/load balancing across two Windows servers.
 # It will not properly report for scopes that are available on multiple servers not configured for failover.
 #
-# Copyright (C) 2018 Dan Baker
-# Copyright (C) 2018 Lancaster Mennonite School
+# Copyright (C) 2018 Dan Baker and Lancaster Mennonite School
 # Released under the terms of the GNU General Public License
 #
 # Produces an email report that looks something like this:
