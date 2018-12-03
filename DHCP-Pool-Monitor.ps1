@@ -3,6 +3,8 @@
 # DHCP-Pool-Monitor.ps1
 # Report Windows Server DHCP Pool utilization
 #
+# This script produces a log file and email report of Windows Server DHCP address pool utilization.
+#
 # This script works with scopes configured for failover/load balancing across two Windows servers.
 # It will not properly report for scopes that are available on multiple servers not configured for failover.
 #
@@ -25,8 +27,8 @@
 
 ##################################################################################################################
 #
-# Domain controllers to query
-$DomainControllers = "DC1", "DC2", "DC3", "DC4"
+# DHCP Servers to query
+$DHCPServers = "DC1", "DC2", "DC3", "DC4"
 #
 # Log folder path
 $LogFolder = "C:\PowerShell\DHCP-Pool-Monitor\Logs"
@@ -46,7 +48,7 @@ Start-Transcript -Path $LogPath
 
 $scopes = @()
 
-$DomainControllers | ForEach {
+$DHCPServers | ForEach {
     (Get-DhcpServerv4ScopeStatistics -ComputerName $_) | ForEach {
         If (-not ($_.Free -eq 0 -and $_.InUse -eq 0)) {
             $scopes += $_
